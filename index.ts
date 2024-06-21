@@ -36,12 +36,11 @@ const rl = readline.createInterface({
   console.log("You should now be connected.");
   console.log(client.session.save()); // Save this string to avoid logging in again
   await client.sendMessage("me", { message: "Hello!" });
-
   const result = await client.invoke(
     new Api.messages.GetHistory({
+      offsetId: 1090, //change offsets to get every message
       peer: -1002083186778,
-
-      limit: 50,
+      limit: 100,
     })
   );
 
@@ -50,3 +49,18 @@ const rl = readline.createInterface({
 
 //peer
 //peerUser, peerChat(group), peerChannel (channel/supergroup)
+//https://core.telegram.org/api/folders
+//A chat is a type of peer
+
+/*
+
+  const result = await client.invoke(
+    new Api.messages.GetHistory({
+      peer: -1002083186778,
+      limit: 100,
+    })
+  );
+
+  console.log(result.messages.map((element) => element.message));
+
+  */
