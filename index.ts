@@ -38,11 +38,15 @@ const rl = readline.createInterface({
   await client.sendMessage("me", { message: "Hello!" });
 
   const result = await client.invoke(
-    new Api.messages.GetDialogs({
-      offsetPeer: "crimsonvapour",
-      limit: 5,
-      excludePinned: false,
+    new Api.messages.GetHistory({
+      peer: -1002083186778,
+
+      limit: 50,
     })
   );
-  console.log(result); // prints the result
+
+  console.log(result.messages.map((element) => element.message));
 })();
+
+//peer
+//peerUser, peerChat(group), peerChannel (channel/supergroup)
