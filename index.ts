@@ -36,15 +36,32 @@ const rl = readline.createInterface({
   console.log("You should now be connected.");
   console.log(client.session.save()); // Save this string to avoid logging in again
   await client.sendMessage("me", { message: "Hello!" });
+
   const result = await client.invoke(
     new Api.messages.GetHistory({
-      offsetId: 1090, //change offsets to get every message
+      offsetId: 150000, //change offsets to get every message
       peer: -1002083186778,
       limit: 100,
     })
   );
 
-  console.log(result.messages.map((element) => element.message));
+  //console.log(result);
+  const prep = result.messages.map((element) => element.replyTo);
+  const prep1 = prep.filter((element) => element != null);
+  const prep2 = prep1.filter((element) => element.forumTopic == true);
+  console.log(prep2);
+
+  /* 
+  const result = await client.invoke(
+    new Api.messages.GetHistory({
+      offsetId: 1090, //change offsets to get every message
+      peer: -1002083186778,
+      limit: 50,
+    })
+  );
+  console.log(result);
+  onsole.log(result.messages.map((element) => element.peerId));
+  */
 })();
 
 //peer
@@ -63,4 +80,28 @@ const rl = readline.createInterface({
 
   console.log(result.messages.map((element) => element.message));
 
-  */
+.date
+.fromID
+.peerID?
+
+
+  const photos = await client.getMessages(-1002083186778, {
+    limit: 100,
+  });
+
+  console.log(photos.map((element) => element));
+
+if (element === null) {
+        return "a";
+      } else {
+        return "b";
+      }
+
+
+General chat is topic 1
+forum topic could be topic 1
+
+topic 1 forum false
+topic 2, 3, 4 forum true
+
+*/
